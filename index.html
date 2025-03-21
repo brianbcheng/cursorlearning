@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallell - Bauhaus Inspired Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bauhaus-red: #E53935;
+            --bauhaus-blue: #1E88E5;
+            --bauhaus-yellow: #FFD700;
+            --bauhaus-black: #000000;
+            --bauhaus-white: #FFFFFF;
+            --bauhaus-grey: #2C2C2C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bauhaus-grey);
+            color: var(--bauhaus-white);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .static-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+            animation: static 0.1s steps(2) infinite;
+            mix-blend-mode: overlay;
+        }
+
+        @keyframes static {
+            0% { 
+                transform: translate(0, 0);
+                background-position: 0 0;
+            }
+            100% { 
+                transform: translate(1px, 1px);
+                background-position: 1px 1px;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--bauhaus-yellow);
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .section-text:nth-child(2) { animation-delay: 0.2s; }
+        .section-text:nth-child(3) { animation-delay: 0.4s; }
+
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .geometric-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            background-color: var(--bauhaus-red);
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            height: 200px;
+            transform: rotate(45deg);
+        }
+
+        .shape-2 {
+            top: 30%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background-color: var(--bauhaus-blue);
+            transform: rotate(30deg);
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 100px;
+            height: 100px;
+            background-color: var(--bauhaus-yellow);
+            transform: rotate(15deg);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin-left: 10%;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            min-height: 4.8rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--bauhaus-white);
+            min-height: 1.5rem;
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--bauhaus-black);
+            color: var(--bauhaus-white);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards 3s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button:hover {
+            background-color: var(--bauhaus-red);
+            transform: translateY(-2px);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background-color: transparent;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--bauhaus-white);
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--bauhaus-white);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--bauhaus-yellow);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 5%;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="static-overlay"></div>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">PARALLELL</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#work">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="geometric-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="content">
+            <h1 class="typing"></h1>
+            <p class="subtitle typing"></p>
+            <a href="#about" class="cta-button">Get Started</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title typing"></h2>
+            <div class="section-content">
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="container">
+            <h2 class="section-title typing"></h2>
+            <div class="section-content">
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title typing"></h2>
+            <div class="section-content">
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+                <p class="section-text typing"></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
